@@ -1,6 +1,8 @@
 package com.example.data.repository
 
+import com.example.data.model.Breed
+
 interface DogsRepository {
 
-    fun getDogs(): List<String>
+    suspend fun getDogBreeds(): List<Breed>
 }
