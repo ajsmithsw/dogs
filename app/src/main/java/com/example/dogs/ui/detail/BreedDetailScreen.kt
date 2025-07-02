@@ -1,5 +1,8 @@
 package com.example.dogs.ui.detail
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -15,6 +18,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 
@@ -57,13 +62,19 @@ fun BreedDetail(
     imageUrls: List<String>
 ) {
     LazyVerticalGrid(
-        modifier = Modifier.fillMaxSize(),
-        columns = GridCells.Fixed(2)) {
+        modifier = modifier.fillMaxSize(),
+        columns = GridCells.Adaptive(180.dp),
+        horizontalArrangement = Arrangement.spacedBy(10.dp),
+        verticalArrangement = Arrangement.spacedBy(10.dp),
+        contentPadding = PaddingValues(10.dp)
+    ) {
         items(imageUrls) {
             GlideImage(
                 model = it,
                 contentDescription = null,
-                modifier = modifier
+                modifier = Modifier
+                    .aspectRatio(1f),
+                contentScale = ContentScale.Crop
             )
         }
     }
