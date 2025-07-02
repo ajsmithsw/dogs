@@ -16,7 +16,7 @@ class BreedsListRouteTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
-    val viewModel: BreedsListViewModel = mockk()
+    private val viewModel: BreedsListViewModel = mockk()
 
     @Before
     fun setUp() {

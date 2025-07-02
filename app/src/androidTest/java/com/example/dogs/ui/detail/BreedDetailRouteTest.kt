@@ -15,7 +15,7 @@ class BreedDetailRouteTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
-    val viewModel: BreedDetailViewModel = mockk()
+    private val viewModel: BreedDetailViewModel = mockk()
 
     @Before
     fun setUp() {
@@ -37,6 +37,4 @@ class BreedDetailRouteTest {
 
         verify { viewModel.handleEvent(BreedUiEvent.GetImagesForBreed(breed)) }
     }
-
-
 }
