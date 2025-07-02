@@ -8,9 +8,9 @@ import com.example.data.model.Breed
 
 @Composable
 fun BreedsListRoute(
+    viewModel: BreedsListViewModel = hiltViewModel(),
     onBreedClick: (Breed) -> Unit
 ) {
-    val viewModel: BreedsListViewModel = hiltViewModel()
     BreedsListScreen(viewModel.uiState.value, onBreedClick)
 
     LaunchedEffect(Unit) {

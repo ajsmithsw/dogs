@@ -22,7 +22,7 @@ class BreedsListViewModelTest {
     fun setup() {
         viewModel = BreedsListViewModel(dogsRepository)
 
-        assert(viewModel.uiState.value is MainUiState.Loading)
+        assert(viewModel.uiState.value is BreedsListUiState.Loading)
     }
 
     @Test
@@ -36,8 +36,8 @@ class BreedsListViewModelTest {
 
         viewModel.handleEvent(BreedsListUiEvent.GetDogBreeds)
 
-        assert(viewModel.uiState.value is MainUiState.Success)
-        val breedsResult = (viewModel.uiState.value as MainUiState.Success).breeds
+        assert(viewModel.uiState.value is BreedsListUiState.Success)
+        val breedsResult = (viewModel.uiState.value as BreedsListUiState.Success).breeds
         assert(breedsResult.isNotEmpty())
     }
 
@@ -47,6 +47,6 @@ class BreedsListViewModelTest {
 
         viewModel.handleEvent(BreedsListUiEvent.GetDogBreeds)
 
-        assert(viewModel.uiState.value is MainUiState.Error)
+        assert(viewModel.uiState.value is BreedsListUiState.Error)
     }
 }

@@ -16,13 +16,13 @@ import com.example.data.model.Breed
 
 @Composable
 fun BreedsListScreen(
-    uiState: MainUiState,
+    uiState: BreedsListUiState,
     onBreedClick: (Breed) -> Unit
 ) {
     when (uiState) {
-        MainUiState.Error -> Text("Error")
-        MainUiState.Loading -> Text("Loading")
-        is MainUiState.Success -> BreedsList(uiState.breeds, onBreedClick)
+        BreedsListUiState.Error -> Text("Error")
+        BreedsListUiState.Loading -> Text("Loading")
+        is BreedsListUiState.Success -> BreedsList(uiState.breeds, onBreedClick)
     }
 }
 

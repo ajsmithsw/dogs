@@ -11,10 +11,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-sealed interface MainUiState {
-    data class Success(val breeds: List<Breed>) : MainUiState
-    data object Error : MainUiState
-    data object Loading : MainUiState
+sealed interface BreedsListUiState {
+    data class Success(val breeds: List<Breed>) : BreedsListUiState
+    data object Error : BreedsListUiState
+    data object Loading : BreedsListUiState
 }
 
 sealed interface BreedsListUiEvent {
@@ -26,8 +26,8 @@ class BreedsListViewModel @Inject constructor(
     private val dogsRepository: DogsRepository,
 ) : ViewModel() {
 
-    private val _uiState: MutableState<MainUiState> = mutableStateOf(MainUiState.Loading)
-    val uiState: State<MainUiState> = _uiState
+    private val _uiState: MutableState<BreedsListUiState> = mutableStateOf(BreedsListUiState.Loading)
+    val uiState: State<BreedsListUiState> = _uiState
 
     fun handleEvent(event: BreedsListUiEvent) {
         when (event) {
@@ -39,9 +39,9 @@ class BreedsListViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 val breeds = dogsRepository.getDogBreeds()
-                _uiState.value = MainUiState.Success(breeds)
+                _uiState.value = BreedsListUiState.Success(breeds)
             } catch (e: Exception) {
-                _uiState.value = MainUiState.Error
+                _uiState.value = BreedsListUiState.Error
             }
         }
     }

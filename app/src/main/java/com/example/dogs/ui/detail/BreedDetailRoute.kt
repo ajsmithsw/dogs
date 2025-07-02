@@ -7,9 +7,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 @Composable
 fun BreedDetailRoute(
     breed: String,
+    viewModel: BreedDetailViewModel = hiltViewModel(),
     onBackClick: () -> Unit
 ) {
-    val viewModel: BreedDetailViewModel = hiltViewModel()
     BreedDetailScreen(
         breed,
         viewModel.uiState.value,
