@@ -17,21 +17,21 @@ sealed interface MainUiState {
     data object Loading : MainUiState
 }
 
-sealed interface MainUiEvent {
-    data object GetDogBreeds : MainUiEvent
+sealed interface BreedsListUiEvent {
+    data object GetDogBreeds : BreedsListUiEvent
 }
 
 @HiltViewModel
 class BreedsListViewModel @Inject constructor(
-    private val dogsRepository: DogsRepository
+    private val dogsRepository: DogsRepository,
 ) : ViewModel() {
 
     private val _uiState: MutableState<MainUiState> = mutableStateOf(MainUiState.Loading)
     val uiState: State<MainUiState> = _uiState
 
-    fun handleEvent(event: MainUiEvent) {
+    fun handleEvent(event: BreedsListUiEvent) {
         when (event) {
-            MainUiEvent.GetDogBreeds -> getDogBreeds()
+            BreedsListUiEvent.GetDogBreeds -> getDogBreeds()
         }
     }
 

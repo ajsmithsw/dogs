@@ -14,6 +14,6 @@ fun BreedsListRoute(
     BreedsListScreen(viewModel.uiState.value, onBreedClick)
 
     LaunchedEffect(Unit) {
-        viewModel.handleEvent(MainUiEvent.GetDogBreeds)
+        viewModel.handleEvent(BreedsListUiEvent.GetDogBreeds)
     }
 }
