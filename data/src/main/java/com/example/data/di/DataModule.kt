@@ -1,5 +1,6 @@
 package com.example.data.di
 
+import com.example.data.BASE_URL
 import com.example.data.repository.DogsRepository
 import com.example.data.repository.DogsRepositoryImpl
 import com.example.data.service.DogsService
@@ -31,7 +32,7 @@ object ServiceModule {
     @Singleton
     fun provideDogsService(): DogsService {
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://dog.ceo/api/")
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
