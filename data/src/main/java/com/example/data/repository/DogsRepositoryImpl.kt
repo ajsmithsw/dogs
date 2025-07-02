@@ -19,4 +19,14 @@ class DogsRepositoryImpl @Inject constructor(
             throw Exception("Failed to fetch dog breeds")
         }
     }
+
+    override suspend fun getImagesForBreed(breed: String): List<String> {
+        val response = dogsService.getImagesForBreed(breed)
+        if (response.isSuccessful) {
+            val imagesResponse = response.body()?.imageUrls ?: emptyList()
+            return imagesResponse
+        } else {
+            throw Exception("Failed to fetch images for breed")
+        }
+    }
 }

@@ -10,7 +10,11 @@ fun BreedDetailRoute(
     onBackClick: () -> Unit
 ) {
     val viewModel: BreedDetailViewModel = hiltViewModel()
-    BreedDetailScreen(viewModel.uiState.value, onBackClick)
+    BreedDetailScreen(
+        breed,
+        viewModel.uiState.value,
+        onBackClick
+    )
 
     LaunchedEffect(Unit) {
         viewModel.handleEvent(BreedUiEvent.GetImagesForBreed(breed))

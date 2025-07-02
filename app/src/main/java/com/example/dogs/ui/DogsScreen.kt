@@ -1,5 +1,6 @@
 package com.example.dogs.ui
 
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -15,21 +16,23 @@ fun DogsScreen(
     navController: NavHostController = rememberNavController()
 ) {
     DogsTheme {
-        NavHost(
-            navController = navController,
-            startDestination = "list"
-        ) {
-            composable(route = "list") {
-                BreedsListRoute { breed ->
-                    navController.navigate("detail?breed=${breed.name}")
+        Surface {
+            NavHost(
+                navController = navController,
+                startDestination = "list"
+            ) {
+                composable(route = "list") {
+                    BreedsListRoute { breed ->
+                        navController.navigate("detail?breed=${breed.name}")
+                    }
                 }
-            }
 
-            composable(route = "detail?breed={breed}") { backStackEntry ->
-                val breed = backStackEntry.arguments?.getString("breed")!!
+                composable(route = "detail?breed={breed}") { backStackEntry ->
+                    val breed = backStackEntry.arguments?.getString("breed")!!
 
-                BreedDetailRoute(breed) {
-                    navController.navigateUp()
+                    BreedDetailRoute(breed) {
+                        navController.navigateUp()
+                    }
                 }
             }
         }
