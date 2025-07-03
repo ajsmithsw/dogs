@@ -14,12 +14,14 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.intl.Locale
@@ -66,6 +68,8 @@ fun BreedsList(
 ) {
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         LazyColumn(
+            modifier = Modifier
+                .testTag("breedsList"),
             contentPadding = innerPadding
         ) {
             item {
@@ -76,9 +80,10 @@ fun BreedsList(
                 )
             }
 
-            items(breeds) { breed ->
+            itemsIndexed(breeds) { index, breed ->
                 ListRow(
                     modifier = Modifier
+                        .testTag("listItem_$index")
                         .fillMaxWidth()
                         .padding(horizontal = 20.dp, vertical = 4.dp),
                     breed = breed,
