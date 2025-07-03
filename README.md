@@ -15,9 +15,10 @@ I took a mostly conventional approach to this exercise, making use of popular fr
 
 ## Architecture
 - Multi-module architecture:
-  - :app
-  - :data
-- MVVM:
+  - :app (main app module)
+  - :data (domain layer)
+- Single activity
+- MVVM architecture:
   - Service -> Repository -> ViewModel -> UI
 
 ## Design considerations
