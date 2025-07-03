@@ -1,5 +1,10 @@
+@file:OptIn(ExperimentalSharedTransitionApi::class)
+
 package com.example.dogs.ui.detail
 
+import androidx.compose.animation.AnimatedContentScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
@@ -27,30 +32,43 @@ import com.bumptech.glide.integration.compose.GlideImage
 @Composable
 fun BreedDetailScreen(
     breed: String,
+    sharedTransitionScope: SharedTransitionScope,
+    animatedContentScope: AnimatedContentScope,
     uiState: BreedUiState,
     onBackClick: () -> Unit
 ) {
-    Scaffold(
-        modifier = Modifier.fillMaxSize(),
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text(breed)
-                },
-                navigationIcon = {
-                    IconButton(onClick = onBackClick) {
-                        Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null)
-                    }
-                })
-        }
-    ) { innerPadding ->
-        when (uiState) {
-            BreedUiState.Error -> Text("Error")
-            BreedUiState.Loading -> Text("Loading")
-            is BreedUiState.Success -> BreedDetail(
-                Modifier.padding(innerPadding),
-                uiState.imageUrls
-            )
+    with(sharedTransitionScope) {
+        Scaffold(
+            modifier = Modifier.fillMaxSize(),
+            topBar = {
+                TopAppBar(
+                    title = {
+                        Text(
+                            breed,
+                            modifier = Modifier.sharedElement(
+                                sharedTransitionScope.rememberSharedContentState(key = breed),
+                                animatedVisibilityScope = animatedContentScope
+                            )
+                        )
+                    },
+                    navigationIcon = {
+                        IconButton(onClick = onBackClick) {
+                            Icon(
+                                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                                contentDescription = null
+                            )
+                        }
+                    })
+            }
+        ) { innerPadding ->
+            when (uiState) {
+                BreedUiState.Error -> Text("Error")
+                BreedUiState.Loading -> Text("Loading")
+                is BreedUiState.Success -> BreedDetail(
+                    Modifier.padding(innerPadding),
+                    uiState.imageUrls
+                )
+            }
         }
     }
 }
