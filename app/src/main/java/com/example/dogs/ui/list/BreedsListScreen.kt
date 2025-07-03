@@ -28,6 +28,7 @@ import com.example.data.model.Breed
 import com.example.dogs.R
 
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun BreedsListScreen(
     uiState: BreedsListUiState,

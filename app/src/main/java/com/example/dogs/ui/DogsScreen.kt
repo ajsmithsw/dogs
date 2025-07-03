@@ -21,7 +21,6 @@ fun DogsScreen(
     DogsTheme {
         Surface {
             SharedTransitionLayout {
-
                 NavHost(
                     navController = navController,
                     startDestination = "list"
