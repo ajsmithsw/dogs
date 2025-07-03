@@ -19,3 +19,8 @@ I took a mostly conventional approach to this exercise, making use of popular fr
   - :data
 - MVVM:
   - Service -> Repository -> ViewModel -> UI
+
+## Design considerations
+- Basic material design theme
+- Lazy grid layout on detail screen
+- Shared element transitions (Breed name -> page title)
