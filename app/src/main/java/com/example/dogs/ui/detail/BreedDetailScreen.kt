@@ -24,6 +24,8 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.capitalize
+import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
@@ -37,6 +39,8 @@ fun BreedDetailScreen(
     uiState: BreedUiState,
     onBackClick: () -> Unit
 ) {
+    val locale = Locale.current
+
     with(sharedTransitionScope) {
         Scaffold(
             modifier = Modifier.fillMaxSize(),
@@ -44,7 +48,7 @@ fun BreedDetailScreen(
                 TopAppBar(
                     title = {
                         Text(
-                            breed,
+                            breed.capitalize(locale),
                             modifier = Modifier.sharedElement(
                                 sharedTransitionScope.rememberSharedContentState(key = breed),
                                 animatedVisibilityScope = animatedContentScope
