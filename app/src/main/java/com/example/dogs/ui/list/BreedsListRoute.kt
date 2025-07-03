@@ -21,7 +21,8 @@ fun BreedsListRoute(
         viewModel.uiState.value,
         sharedTransitionScope,
         animatedContentScope,
-        onBreedClick
+        onBreedClick,
+        onRetryClick = { viewModel.handleEvent(BreedsListUiEvent.GetDogBreeds) }
     )
 
     LaunchedEffect(Unit) {

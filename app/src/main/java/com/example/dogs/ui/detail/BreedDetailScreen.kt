@@ -29,6 +29,8 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
+import com.example.dogs.ui.shared.ErrorScreen
+import com.example.dogs.ui.shared.LoadingScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -37,7 +39,8 @@ fun BreedDetailScreen(
     sharedTransitionScope: SharedTransitionScope,
     animatedContentScope: AnimatedContentScope,
     uiState: BreedUiState,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    onRetryClick: (String) -> Unit
 ) {
     val locale = Locale.current
 
@@ -66,11 +69,16 @@ fun BreedDetailScreen(
             }
         ) { innerPadding ->
             when (uiState) {
-                BreedUiState.Error -> Text("Error")
-                BreedUiState.Loading -> Text("Loading")
+                BreedUiState.Error -> ErrorScreen(
+                    modifier = Modifier.padding(innerPadding),
+                    onRetry = { onRetryClick(breed) }
+                )
+                BreedUiState.Loading -> LoadingScreen(
+                    modifier = Modifier.padding(innerPadding)
+                )
                 is BreedUiState.Success -> BreedDetail(
-                    Modifier.padding(innerPadding),
-                    uiState.imageUrls
+                    modifier = Modifier.padding(innerPadding),
+                    imageUrls = uiState.imageUrls
                 )
             }
         }

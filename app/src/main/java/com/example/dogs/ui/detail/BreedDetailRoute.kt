@@ -21,7 +21,8 @@ fun BreedDetailRoute(
         sharedTransitionScope,
         animatedContentScope,
         viewModel.uiState.value,
-        onBackClick
+        onBackClick,
+        onRetryClick = { viewModel.handleEvent(BreedUiEvent.GetImagesForBreed(it)) }
     )
 
     LaunchedEffect(Unit) {

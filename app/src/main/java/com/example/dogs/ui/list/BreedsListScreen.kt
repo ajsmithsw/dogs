@@ -26,6 +26,8 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.unit.dp
 import com.example.data.model.Breed
 import com.example.dogs.R
+import com.example.dogs.ui.shared.ErrorScreen
+import com.example.dogs.ui.shared.LoadingScreen
 
 
 @OptIn(ExperimentalSharedTransitionApi::class)
@@ -34,16 +36,22 @@ fun BreedsListScreen(
     uiState: BreedsListUiState,
     sharedTransitionScope: SharedTransitionScope,
     animatedContentScope: AnimatedContentScope,
-    onBreedClick: (Breed) -> Unit
+    onBreedClick: (Breed) -> Unit,
+    onRetryClick: () -> Unit,
 ) {
     when (uiState) {
-        BreedsListUiState.Error -> Text("Error")
-        BreedsListUiState.Loading -> Text("Loading")
+        BreedsListUiState.Error -> ErrorScreen(
+            modifier = Modifier.fillMaxSize(),
+            onRetry = onRetryClick
+        )
+        BreedsListUiState.Loading -> LoadingScreen(
+            modifier = Modifier.fillMaxSize()
+        )
         is BreedsListUiState.Success -> BreedsList(
-            uiState.breeds,
-            sharedTransitionScope,
-            animatedContentScope,
-            onBreedClick
+            breeds = uiState.breeds,
+            sharedTransitionScope = sharedTransitionScope,
+            animatedContentScope = animatedContentScope,
+            onBreedClick = onBreedClick
         )
     }
 }
